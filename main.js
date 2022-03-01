@@ -70,7 +70,7 @@ while (time<360){
     sumoffish=fishcaught.length;
 
     console.log(`The time is ${hour}:${minute}am. So far you've caught:`);
-    console.log(sumoffish+'Fish,  '+sumofweight+'Weight,  $'+sumofvalue);
+    console.log(sumoffish+' Fish,  '+sumofweight+' Weight,  $'+sumofvalue);
     fishcaught.push(newfish(chumed));
     sumofweight+=fishcaught[fishcaught.length-1].weight;
     sumofvalue+=fishcaught[fishcaught.length-1].worth;
@@ -82,7 +82,7 @@ while (time<360){
     }else{
         var action=prompt('Your action: [c]atch or [r]elease?');
     }
-    if (action=='r'){
+    while (action=='r' && fishcaught.length>0){
         i=0;
         console.log('You have '+fishcaught.length+' fish.Please choose one to release');
         while(fishcaught[i]){
@@ -95,12 +95,16 @@ while (time<360){
         sumofvalue-=fishcaught[drop].worth;
         console.log(fishcaught[drop].name+"released");
         fishcaught.splice(drop, 1); 
+        if (fishcaught>0){
+            console.log('Keep releasing?');
+            action=prompt('Type r to keep release, anyother char otherwiese');
+        }
 
-    }else{
-        console.log('All fish you caught swimming in your tank')
     }
+        console.log('All fish you caught swimming in your tank');
     
-    time+=chum(chumed)
+    
+    time+=chum(chumed);
     console.log('==========================================');
 
 }
@@ -113,4 +117,4 @@ while(fishcaught[i]){
 }
 console.log('Total weight: '+sumofweight+' lbs')
 console.log('Total value: $'+sumofvalue)
-console('Thank you for playing, by Anson')
+console.log('Thank you for playing, by Anson')
