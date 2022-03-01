@@ -28,9 +28,19 @@ function chum(chumed){
     }else{return randomtime();}
 }
 function newfish(){
-    let w=randomweight()
-    let object={name:randomcolor()+' '+randomfish(), weight:w ,worth:w*(4+2*Math.random())};
-    return object
+    let w=randomweight();
+    let r=randomfish();
+    if (r=='golden doubloon'){
+        let object={name:r, weight:w ,worth:w*(1000+2*Math.random())};
+        console.log('It is Golden Doubloon!!!!!!!')
+        return object;
+}else{
+    let object={name:randomcolor()+' '+r, weight:w ,worth:w*(4+2*Math.random())};
+    return object;
+}
+
+    
+    
 }
 
 let time=0;
@@ -49,13 +59,13 @@ const prompt=require('prompt-sync')();
 
 console.log("You've gone fishing! Try to maximize the value of your caught fish. You can fish for six hours (till 12:00pm) and can catch at most 10 lbs of fish.");
 console.log('==========================================');
-console.log('The Time is 5:00am. Your boat just arrive the fishing spot?');
+console.log('The Time is 4:00am. Your boat just arrive the fishing spot?');
 console.log('Chum to make fishing bit faster, It take 30 mins .We use live bait so it is now or never!')
 chumed=prompt('Do you want to chum the water? Type 1 for yes, 0 for no');
 if (chumed==1){
     chumed=true;
     console.log('Water chumed');
-    time-=30;
+    time+=30;
 }else{
     chumed=false;
     console.log('Trusting your Luck? Great!');
@@ -95,7 +105,7 @@ while (time<360){
         sumofvalue-=fishcaught[drop].worth;
         console.log(fishcaught[drop].name+"released");
         fishcaught.splice(drop, 1); 
-        if (fishcaught>0){
+        if (fishcaught.length>0){
             console.log('Keep releasing?');
             action=prompt('Type r to keep release, anyother char otherwiese');
         }
